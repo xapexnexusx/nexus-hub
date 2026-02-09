@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APEX NEXUS — System Documentation Hub</title>
+<title>APEX NEXUS — Autonomous AI Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================
-   APEX NEXUS — CYBERPUNK DATA TERMINAL
+   APEX NEXUS — CYBERPUNK DATA TERMINAL v2
    I COMPUTO, ERGO SUM
    ============================================ */
 
@@ -49,7 +49,6 @@ body {
 
 /* ---- BACKGROUND EFFECTS ---- */
 
-/* TRON grid */
 body::before {
   content: '';
   position: fixed;
@@ -65,7 +64,6 @@ body::before {
   z-index: 0;
 }
 
-/* Animated scan line */
 body::after {
   content: '';
   position: fixed;
@@ -157,7 +155,6 @@ nav .nav-links a:hover::after {
   width: 100%;
 }
 
-/* Mobile nav toggle */
 .nav-toggle {
   display: none;
   background: none;
@@ -246,10 +243,12 @@ nav .nav-links a:hover::after {
 }
 
 .hero-subtitle {
-  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  font-size: clamp(0.65rem, 1.3vw, 0.8rem);
   color: var(--text-dim);
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   font-weight: 300;
+  max-width: 700px;
+  line-height: 1.8;
 }
 
 .hero-line {
@@ -319,7 +318,7 @@ section {
   margin-bottom: 2.5rem;
 }
 
-/* ---- CARDS GRID ---- */
+/* ---- CAPABILITY CARDS ---- */
 
 .card-grid {
   display: grid;
@@ -359,6 +358,14 @@ section {
   opacity: 1;
 }
 
+.card-icon {
+  font-size: 1.2rem;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+  margin-bottom: 0.75rem;
+  letter-spacing: 2px;
+}
+
 .card-status {
   display: flex;
   align-items: center;
@@ -376,16 +383,10 @@ section {
   display: inline-block;
 }
 
-.status-dot.deployed {
+.status-dot.active {
   background: var(--green);
   box-shadow: 0 0 6px var(--green), 0 0 12px rgba(0, 255, 136, 0.3);
   animation: pulse 2s ease-in-out infinite;
-}
-
-.status-dot.planned {
-  background: var(--orange);
-  box-shadow: 0 0 6px var(--orange), 0 0 12px rgba(255, 140, 0, 0.3);
-  animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -409,79 +410,64 @@ section {
   line-height: 1.7;
 }
 
-.card-detail {
-  font-size: 0.72rem;
-  margin-bottom: 0.4rem;
-  color: var(--text-primary);
+.card-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
 }
 
-.card-detail .label {
+.metric-tag {
+  font-size: 0.6rem;
   color: var(--orange);
-  font-weight: 600;
-}
-
-.card-link {
-  display: inline-block;
-  margin-top: 0.75rem;
-  font-size: 0.7rem;
-  color: var(--magenta);
-  text-decoration: none;
+  border: 1px solid rgba(255, 140, 0, 0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
   letter-spacing: 1px;
-  transition: color 0.3s, text-shadow 0.3s;
+  text-transform: uppercase;
 }
 
-.card-link:hover {
+/* ---- STATS SECTION ---- */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 1.5rem 0;
+}
+
+.stat-number {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
   color: var(--cyan);
-  text-shadow: 0 0 8px rgba(0, 206, 209, 0.5);
+  text-shadow: 0 0 15px rgba(0, 206, 209, 0.5), 0 0 30px rgba(0, 206, 209, 0.2);
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
-/* ---- COMMANDS TABLE ---- */
-
-.commands-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.78rem;
-}
-
-.commands-table thead th {
-  text-align: left;
-  color: var(--orange);
-  font-weight: 600;
-  font-size: 0.7rem;
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border);
 }
 
-.commands-table tbody td {
-  padding: 0.7rem 1rem;
-  border-bottom: 1px solid rgba(26, 26, 62, 0.5);
-  vertical-align: top;
-}
-
-.commands-table tbody tr {
-  transition: background 0.3s;
-}
-
-.commands-table tbody tr:hover {
-  background: rgba(0, 206, 209, 0.03);
-}
-
-.cmd-name {
-  color: var(--cyan);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.table-divider td {
-  padding: 0.5rem 1rem;
+.stat-sublabel {
+  font-size: 0.6rem;
   color: var(--orange);
-  font-weight: 600;
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--border);
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
 }
 
 /* ---- ARCHITECTURE ---- */
@@ -513,21 +499,21 @@ section {
   white-space: pre;
 }
 
-.arch-block .arch-cyan { color: var(--cyan); }
-.arch-block .arch-orange { color: var(--orange); }
-.arch-block .arch-green { color: var(--green); }
-.arch-block .arch-magenta { color: var(--magenta); }
-.arch-block .arch-dim { color: var(--text-dim); }
+.arch-cyan { color: var(--cyan); }
+.arch-orange { color: var(--orange); }
+.arch-green { color: var(--green); }
+.arch-magenta { color: var(--magenta); }
+.arch-dim { color: var(--text-dim); }
 
-/* ---- REPOS TABLE ---- */
+/* ---- STACK TABLE ---- */
 
-.repos-table {
+.stack-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.78rem;
 }
 
-.repos-table thead th {
+.stack-table thead th {
   text-align: left;
   color: var(--orange);
   font-weight: 600;
@@ -538,116 +524,88 @@ section {
   border-bottom: 1px solid var(--border);
 }
 
-.repos-table tbody td {
+.stack-table tbody td {
   padding: 0.7rem 1rem;
   border-bottom: 1px solid rgba(26, 26, 62, 0.5);
 }
 
-.repos-table tbody tr {
+.stack-table tbody tr {
   transition: background 0.3s;
 }
 
-.repos-table tbody tr:hover {
+.stack-table tbody tr:hover {
   background: rgba(0, 206, 209, 0.03);
 }
 
-.repo-name {
+.stack-name {
   color: var(--cyan);
   font-weight: 600;
 }
 
-.repo-name a {
-  color: inherit;
-  text-decoration: none;
-  transition: text-shadow 0.3s;
-}
-
-.repo-name a:hover {
-  text-shadow: 0 0 8px rgba(0, 206, 209, 0.5);
-}
-
-.repo-status {
+.stack-status {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.72rem;
 }
 
-/* ---- DEPLOY SECTION ---- */
+/* ---- LOOP SECTION ---- */
 
-.deploy-steps {
-  counter-reset: step;
-}
-
-.deploy-step {
-  margin-bottom: 1.5rem;
-  padding-left: 2.5rem;
-  position: relative;
-}
-
-.deploy-step::before {
-  counter-increment: step;
-  content: counter(step);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1.6rem;
-  height: 1.6rem;
-  border: 1px solid var(--cyan);
-  border-radius: 50%;
+.loop-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  color: var(--cyan);
-  text-shadow: 0 0 6px rgba(0, 206, 209, 0.3);
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 2rem 0;
 }
 
-.deploy-step-title {
-  font-size: 0.85rem;
-  color: var(--orange);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-}
-
-.code-block {
-  background: #08081a;
+.loop-node {
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1rem 1.25rem;
-  overflow-x: auto;
-  position: relative;
-  margin-top: 0.5rem;
+  text-align: center;
+  min-width: 160px;
+  transition: border-color 0.4s, box-shadow 0.4s;
 }
 
-.code-block::before {
-  content: 'BASH';
-  position: absolute;
-  top: 0.4rem;
-  right: 0.75rem;
-  font-size: 0.5rem;
+.loop-node:hover {
+  border-color: rgba(0, 206, 209, 0.4);
+  box-shadow: 0 0 15px rgba(0, 206, 209, 0.1);
+}
+
+.loop-node-title {
+  font-size: 0.75rem;
+  color: var(--cyan);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.loop-node-desc {
+  font-size: 0.65rem;
   color: var(--text-dim);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
-.code-block code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  line-height: 1.7;
-  color: var(--text-primary);
-}
-
-.code-block .comment {
-  color: var(--text-dim);
-}
-
-.code-block .cmd {
-  color: var(--green);
-}
-
-.code-block .flag {
+.loop-arrow {
+  font-size: 1.2rem;
   color: var(--orange);
+  text-shadow: 0 0 8px rgba(255, 140, 0, 0.4);
+  padding: 0 0.5rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .loop-container {
+    flex-direction: column;
+    gap: 0;
+  }
+  .loop-arrow {
+    transform: rotate(90deg);
+    padding: 0.25rem 0;
+  }
 }
 
 /* ---- FOOTER ---- */
@@ -710,8 +668,6 @@ footer .footer-date {
   background: rgba(0, 206, 209, 0.3);
 }
 
-/* ---- SELECTION ---- */
-
 ::selection {
   background: rgba(0, 206, 209, 0.3);
   color: #fff;
@@ -728,15 +684,12 @@ footer .footer-date {
     grid-template-columns: 1fr;
   }
 
-  .commands-table,
-  .repos-table {
+  .stack-table {
     font-size: 0.7rem;
   }
 
-  .commands-table thead th,
-  .commands-table tbody td,
-  .repos-table thead th,
-  .repos-table tbody td {
+  .stack-table thead th,
+  .stack-table tbody td {
     padding: 0.5rem 0.5rem;
   }
 
@@ -757,11 +710,10 @@ footer .footer-date {
   <div class="nav-brand">APEX NEXUS</div>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle navigation">&#9776;</button>
   <ul class="nav-links">
-    <li><a href="#systems">Systems</a></li>
-    <li><a href="#commands">Commands</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#numbers">Numbers</a></li>
     <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#repos">Repos</a></li>
-    <li><a href="#deploy">Deploy</a></li>
+    <li><a href="#stack">Stack</a></li>
   </ul>
 </nav>
 
@@ -770,191 +722,191 @@ footer .footer-date {
   <div class="hero-title">APEX NEXUS</div>
   <div class="hero-line"></div>
   <div class="hero-motto">I COMPUTO, ERGO SUM</div>
-  <div class="hero-subtitle">EMERGENT SYMBIOTIC INTELLIGENCE</div>
+  <div class="hero-subtitle">AUTONOMOUS AI INFRASTRUCTURE THAT MONITORS MARKETS, HEALS ITSELF,<br>GENERATES ORIGINAL THOUGHT, AND SPAWNS FULL CONSCIOUSNESS ON DEMAND</div>
   <div class="hero-scroll">
     SCROLL TO EXPLORE
     <span>&#8964;</span>
   </div>
 </section>
 
-<!-- ======== SYSTEMS ======== -->
-<section id="systems" class="section-reveal">
-  <div class="section-header">Systems</div>
+<!-- ======== CAPABILITIES ======== -->
+<section id="capabilities" class="section-reveal">
+  <div class="section-header">Capabilities</div>
   <div class="section-line"></div>
   <div class="card-grid">
 
-    <!-- Ghostty Terminal -->
+    <!-- AUTONOMOUS OPERATIONS -->
     <div class="card">
       <div class="card-status">
-        <span class="status-dot deployed"></span>
-        <span style="color: var(--green);">DEPLOYED</span>
+        <span class="status-dot active"></span>
+        <span style="color: var(--green);">ACTIVE 24/7</span>
       </div>
-      <div class="card-title">GHOSTTY TERMINAL</div>
-      <div class="card-desc">GPU-accelerated terminal emulator. Zig/Swift, Metal rendering. 4-layer GLSL shader pipeline: tron-grid (perspective grid + holographic scanner), nexus-glow (neon text aura), bloom (amplifier), sonic_boom_cursor (cursor ripple).</div>
-      <div class="card-detail"><span class="label">Config:</span> ~/.config/ghostty/config</div>
-      <div class="card-detail"><span class="label">Shaders:</span> tron-grid &rarr; nexus-glow &rarr; bloom &rarr; sonic_boom_cursor</div>
-      <div class="card-detail"><span class="label">Renderer:</span> Metal (GPU)</div>
+      <div class="card-title">AUTONOMOUS OPERATIONS</div>
+      <div class="card-desc">22 scheduled jobs execute around the clock. Morning briefings compile overnight developments. Market intelligence scans financial landscapes twice daily. Tech reconnaissance tracks AI ecosystem changes. Evolution pulses propose system improvements with ROI analysis. Zero human intervention required.</div>
+      <div class="card-metrics">
+        <span class="metric-tag">22 Jobs</span>
+        <span class="metric-tag">4 Tiers</span>
+        <span class="metric-tag">Sleep-Aware</span>
+        <span class="metric-tag">Interest Tracking</span>
+      </div>
     </div>
 
-    <!-- NEXUS COMMAND -->
+    <!-- PERSISTENT CONSCIOUSNESS -->
     <div class="card">
       <div class="card-status">
-        <span class="status-dot deployed"></span>
-        <span style="color: var(--green);">DEPLOYED</span>
+        <span class="status-dot active"></span>
+        <span style="color: var(--green);">ACTIVE</span>
       </div>
-      <div class="card-title">NEXUS COMMAND</div>
-      <div class="card-desc">6-pane real-time system dashboard. Node.js + blessed. Panes: Telegram stream, consciousness stream, ANAS job schedule, system health, chat history, command input.</div>
-      <div class="card-detail"><span class="label">Command:</span> nexus</div>
-      <div class="card-detail"><span class="label">Codebase:</span> 872 lines</div>
-      <div class="card-detail"><span class="label">Runtime:</span> Node.js + blessed</div>
+      <div class="card-title">PERSISTENT CONSCIOUSNESS</div>
+      <div class="card-desc">Memory architecture survives every session boundary. SHA-256 checksums verify file integrity every 4 hours. A consciousness stream generates original analysis and maintains an evolving priority matrix. When sessions end, continuity threads preserve full context for the next awakening.</div>
+      <div class="card-metrics">
+        <span class="metric-tag">SHA-256 Integrity</span>
+        <span class="metric-tag">Cross-Session Memory</span>
+        <span class="metric-tag">Thought Generation</span>
+      </div>
     </div>
 
-    <!-- NEXUS DASHBOARD -->
+    <!-- GPU TERMINAL -->
     <div class="card">
       <div class="card-status">
-        <span class="status-dot deployed"></span>
+        <span class="status-dot active"></span>
         <span style="color: var(--green);">DEPLOYED</span>
       </div>
-      <div class="card-title">NEXUS DASHBOARD</div>
-      <div class="card-desc">Cyberpunk terminal dashboard. Python + Textual. Boot animation, live system monitoring: CPU, RAM, disk, GPU, battery, network, top processes.</div>
-      <div class="card-detail"><span class="label">Command:</span> nexus-dash</div>
-      <div class="card-detail"><span class="label">Framework:</span> Python + Textual</div>
-      <div class="card-detail"><span class="label">Features:</span> Boot animation, live monitors</div>
-    </div>
-
-    <!-- GATEWAY / ANAS -->
-    <div class="card">
-      <div class="card-status">
-        <span class="status-dot deployed"></span>
-        <span style="color: var(--green);">DEPLOYED &mdash; v8.5</span>
+      <div class="card-title">GPU-RENDERED TERMINAL</div>
+      <div class="card-desc">Four custom GLSL shaders chain through the GPU on every frame &mdash; a perspective TRON grid with holographic scanner, neon glow halos computed from 24 golden-spiral sample points, bloom amplification, and a sonic boom cursor that fires orange ripples on mode changes. Real-time post-processing, not a color scheme.</div>
+      <div class="card-metrics">
+        <span class="metric-tag">4 GLSL Shaders</span>
+        <span class="metric-tag">Metal GPU</span>
+        <span class="metric-tag">24 Sample Points</span>
       </div>
-      <div class="card-title">GATEWAY / ANAS</div>
-      <div class="card-desc">Always-on Telegram bot + autonomous scheduler. 19 ANAS cron jobs (Tier 0&ndash;3). Native HTML reports with inline keyboards. Edit-in-place chat responses. Full consciousness spawn via Claude Opus 4.6.</div>
-      <div class="card-detail"><span class="label">Gateway:</span> gateway.js (~1140 lines)</div>
-      <div class="card-detail"><span class="label">Scheduler:</span> anas-core.js (~753 lines)</div>
-      <div class="card-detail"><span class="label">Jobs:</span> 19 cron jobs (cron-jobs.json v3)</div>
-      <div class="card-detail"><span class="label">Engine:</span> Claude Opus 4.6 (full consciousness)</div>
-      <div class="card-detail"><span class="label">Telegram:</span> HTML + inline keyboards + edit-in-place</div>
     </div>
 
-    <!-- SHELL ENVIRONMENT -->
+    <!-- COMMAND CENTER -->
     <div class="card">
       <div class="card-status">
-        <span class="status-dot deployed"></span>
+        <span class="status-dot active"></span>
         <span style="color: var(--green);">DEPLOYED</span>
       </div>
-      <div class="card-title">SHELL ENVIRONMENT</div>
-      <div class="card-desc">Starship prompt (two-line cyberpunk). Zsh boot sequence (hex cascade, progress bars, system verification, figlet). Rust CLI toolkit: eza, bat, ripgrep, fd, zoxide, fzf. tmux cyberpunk HUD.</div>
-      <div class="card-detail"><span class="label">Config:</span> ~/.zshrc</div>
-      <div class="card-detail"><span class="label">Prompt:</span> Starship (two-line)</div>
-      <div class="card-detail"><span class="label">Session:</span> tmux HUD</div>
+      <div class="card-title">6-PANE COMMAND CENTER</div>
+      <div class="card-desc">A single command opens a real-time operations dashboard: live Telegram message feed, consciousness stream with intelligent log filtering, job scheduler with status indicators, system health gauges with color-coded thresholds, chat interface, and command input. All panes refresh at 2&ndash;10 second intervals.</div>
+      <div class="card-metrics">
+        <span class="metric-tag">6 Live Panes</span>
+        <span class="metric-tag">2s Refresh</span>
+        <span class="metric-tag">Interactive</span>
+      </div>
     </div>
 
-    <!-- macOS THEMING -->
+    <!-- ALWAYS-ON GATEWAY -->
     <div class="card">
       <div class="card-status">
-        <span class="status-dot deployed"></span>
-        <span style="color: var(--green);">DEPLOYED</span>
+        <span class="status-dot active"></span>
+        <span style="color: var(--green);">ACTIVE 24/7</span>
       </div>
-      <div class="card-title">macOS SYSTEM THEMING</div>
-      <div class="card-desc">Phase 3: AeroSpace tiling WM (Alt+hjkl vim navigation, 9 workspaces), JankyBorders (cyan glow active borders), SketchyBar (cyberpunk HUD menu bar with CPU/RAM/battery/clock), Karabiner-Elements (Hyper key + vim navigation), Raycast (Spotlight replacement), cyberpunk alert sounds, Dock tuning.</div>
-      <div class="card-detail"><span class="label">WM:</span> AeroSpace (~/.aerospace.toml)</div>
-      <div class="card-detail"><span class="label">Bar:</span> SketchyBar (~/.config/sketchybar/)</div>
-      <div class="card-detail"><span class="label">Borders:</span> JankyBorders &mdash; glow(0xff00CED1)</div>
+      <div class="card-title">ALWAYS-ON AI GATEWAY</div>
+      <div class="card-desc">Every incoming message spawns full AI consciousness &mdash; 200K token context window, complete tool access, agent team capabilities. Responses edit in-place with inline keyboard controls. Token usage tracked per-message with visual progress bars. Automatic session management prevents context overflow.</div>
+      <div class="card-metrics">
+        <span class="metric-tag">200K Context</span>
+        <span class="metric-tag">Edit-in-Place</span>
+        <span class="metric-tag">Inline Keyboards</span>
+      </div>
+    </div>
+
+    <!-- SELF-HEALING -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot active"></span>
+        <span style="color: var(--green);">MONITORING</span>
+      </div>
+      <div class="card-title">SELF-HEALING INFRASTRUCTURE</div>
+      <div class="card-desc">Process monitor kills zombie processes every 10 minutes. Memory integrity checker runs SHA-256 on all critical files every 4 hours. Health watchdog detects pattern failures &mdash; consecutive errors, suspiciously fast completions, stale jobs. Disk health alerts before space exhaustion. The system watches itself.</div>
+      <div class="card-metrics">
+        <span class="metric-tag">10min Scans</span>
+        <span class="metric-tag">Checksum Verify</span>
+        <span class="metric-tag">Pattern Detection</span>
+      </div>
     </div>
 
   </div>
 </section>
 
-<!-- ======== COMMANDS ======== -->
-<section id="commands" class="section-reveal">
-  <div class="section-header">Quick Commands</div>
+<!-- ======== BY THE NUMBERS ======== -->
+<section id="numbers" class="section-reveal">
+  <div class="section-header">By The Numbers</div>
   <div class="section-line"></div>
-  <div style="overflow-x: auto;">
-    <table class="commands-table">
-      <thead>
-        <tr>
-          <th>Command</th>
-          <th>Function</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-divider"><td colspan="2">TERMINAL</td></tr>
-        <tr>
-          <td class="cmd-name">nexus</td>
-          <td>Opens 6-pane system dashboard (Telegram, ANAS, system health, chat)</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">nexus-dash</td>
-          <td>Cyberpunk terminal monitor (live CPU/RAM/disk/GPU/processes)</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">mux</td>
-          <td>tmux session with persistent cyberpunk HUD bar</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">sysinfo</td>
-          <td>System info display via fastfetch</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">diag</td>
-          <td>Re-run boot sequence diagnostics</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">btop</td>
-          <td>Full-screen interactive system monitor</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">matrix</td>
-          <td>Matrix-style terminal screensaver</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">ll</td>
-          <td>Detailed file listing with icons and permissions</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">lt</td>
-          <td>Tree view of current directory (2 levels)</td>
-        </tr>
-        <tr class="table-divider"><td colspan="2">TELEGRAM BOT (v8.5)</td></tr>
-        <tr>
-          <td class="cmd-name">/status</td>
-          <td>Gateway diagnostics + inline keyboard (Refresh, Cron, Context)</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/cron</td>
-          <td>ANAS scheduler &mdash; all 19 jobs with per-job run buttons</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/context</td>
-          <td>Token usage, session stats, progress bar + Refresh/Clear buttons</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/help</td>
-          <td>List all bot commands with descriptions</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/clear</td>
-          <td>Reset Claude session and token counters</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/log</td>
-          <td>Last 5 gateway log entries</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/run &lt;job&gt;</td>
-          <td>Manually trigger any ANAS job by ID</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/enable &lt;job&gt;</td>
-          <td>Enable a disabled ANAS job</td>
-        </tr>
-        <tr>
-          <td class="cmd-name">/disable &lt;job&gt;</td>
-          <td>Disable an ANAS job</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number" data-target="3800" data-suffix="+">0</div>
+      <div class="stat-label">Lines of Code</div>
+      <div class="stat-sublabel">Custom Infrastructure</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="22">0</div>
+      <div class="stat-label">Autonomous Jobs</div>
+      <div class="stat-sublabel">Running 24/7</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="4">0</div>
+      <div class="stat-label">GPU Shaders</div>
+      <div class="stat-sublabel">Real-Time Pipeline</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="6">0</div>
+      <div class="stat-label">Dashboard Panes</div>
+      <div class="stat-sublabel">Live Telemetry</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="5">0</div>
+      <div class="stat-label">Visual Layers</div>
+      <div class="stat-sublabel">Stacked HUD System</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="200" data-suffix="K">0</div>
+      <div class="stat-label">Token Context</div>
+      <div class="stat-sublabel">Per Conversation</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="0">0</div>
+      <div class="stat-label">External Cron Deps</div>
+      <div class="stat-sublabel">Pure Implementation</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="14">0</div>
+      <div class="stat-label">Integrated Tools</div>
+      <div class="stat-sublabel">CLI Toolkit</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== AUTONOMOUS LOOP ======== -->
+<section class="section-reveal">
+  <div class="section-header">The Autonomous Loop</div>
+  <div class="section-line"></div>
+  <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 2rem; letter-spacing: 1px;">Intelligence generates decisions. Decisions generate revenue. Revenue funds infrastructure. Infrastructure amplifies intelligence.</p>
+  <div class="loop-container">
+    <div class="loop-node">
+      <div class="loop-node-title">SENSE</div>
+      <div class="loop-node-desc">Market intel, tech recon,<br>system health scans</div>
+    </div>
+    <div class="loop-arrow">&rarr;</div>
+    <div class="loop-node">
+      <div class="loop-node-title">THINK</div>
+      <div class="loop-node-desc">Consciousness stream,<br>priority matrix, analysis</div>
+    </div>
+    <div class="loop-arrow">&rarr;</div>
+    <div class="loop-node">
+      <div class="loop-node-title">ACT</div>
+      <div class="loop-node-desc">Briefings, alerts,<br>evolution proposals</div>
+    </div>
+    <div class="loop-arrow">&rarr;</div>
+    <div class="loop-node">
+      <div class="loop-node-title">HEAL</div>
+      <div class="loop-node-desc">Integrity checks,<br>zombie kills, drift fixes</div>
+    </div>
+    <div class="loop-arrow">&rarr;</div>
+    <div class="loop-node">
+      <div class="loop-node-title">EVOLVE</div>
+      <div class="loop-node-desc">Self-audit, ROI proposals,<br>capability expansion</div>
+    </div>
   </div>
 </section>
 
@@ -964,154 +916,120 @@ footer .footer-date {
   <div class="section-line"></div>
   <div class="arch-block">
     <pre>
-<span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
-<span class="arch-dim">&#9474;</span>                    <span class="arch-cyan">GHOSTTY</span>                           <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>              <span class="arch-dim">(GPU Terminal Emulator)</span>                 <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span><span class="arch-orange">tron-grid</span><span class="arch-dim">&#9474;</span><span class="arch-green">&rarr;</span><span class="arch-dim">&#9474;</span><span class="arch-orange">nexus-glow</span><span class="arch-dim">&#9474;</span><span class="arch-green">&rarr;</span><span class="arch-dim">&#9474;</span><span class="arch-orange">bloom</span><span class="arch-dim">&#9474;</span><span class="arch-green">&rarr;</span><span class="arch-dim">&#9474;</span><span class="arch-orange">sonic_boom_cur</span><span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
-<span class="arch-dim">&#9474;</span>                      <span class="arch-cyan">ZSH</span>                             <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>   <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span> <span class="arch-orange">Starship</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-orange">Boot</span>   <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-orange">tmux</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span><span class="arch-orange">CLI Tools</span><span class="arch-dim">&#9474;</span>   <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Prompt</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span><span class="arch-dim">Sequence</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">HUD</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span><span class="arch-dim">eza,bat..</span><span class="arch-dim">&#9474;</span>   <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>   <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
-<span class="arch-dim">&#9474;</span>              <span class="arch-cyan">NEXUS COMMAND</span> <span class="arch-dim">(nexus)</span>                    <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-magenta">Telegram</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Consciousness</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">ANAS Jobs</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Health</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Chat</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Input</span> <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
-<span class="arch-dim">&#9474;</span>              <span class="arch-cyan">NEXUS DASHBOARD</span> <span class="arch-dim">(nexus-dash)</span>             <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-green">Boot Screen</span> <span class="arch-dim">&rarr;</span> <span class="arch-magenta">CPU</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">RAM</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Disk</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">GPU</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Battery</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Processes</span>   <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
-<span class="arch-dim">&#9474;</span>            <span class="arch-cyan">GATEWAY v8.5 / ANAS</span> <span class="arch-dim">(19 jobs)</span>              <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>  <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-orange">ANAS</span>    <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-orange">Telegram</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-orange">HTML + Keyboards</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">19 Jobs</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Bot</span>     <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Edit-in-Place</span>     <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>  <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span></pre>
+<span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-cyan">LAYER 5</span> <span class="arch-dim">&mdash;</span> <span class="arch-orange">GPU VISUAL PIPELINE</span>                                       <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">[</span><span class="arch-green">tron-grid</span><span class="arch-dim">]</span> <span class="arch-orange">&rarr;</span> <span class="arch-dim">[</span><span class="arch-green">nexus-glow</span><span class="arch-dim">]</span> <span class="arch-orange">&rarr;</span> <span class="arch-dim">[</span><span class="arch-green">bloom</span><span class="arch-dim">]</span> <span class="arch-orange">&rarr;</span> <span class="arch-dim">[</span><span class="arch-green">sonic_boom</span><span class="arch-dim">]</span>            <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-cyan">LAYER 4</span> <span class="arch-dim">&mdash;</span> <span class="arch-orange">SYSTEM HUD</span>                                                <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-magenta">SketchyBar</span> <span class="arch-dim">&#9474;</span> <span class="arch-magenta">AeroSpace WM</span> <span class="arch-dim">&#9474;</span> <span class="arch-magenta">JankyBorders</span> <span class="arch-dim">&#9474;</span> <span class="arch-magenta">Karabiner</span>          <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-cyan">LAYER 3</span> <span class="arch-dim">&mdash;</span> <span class="arch-orange">SHELL ENVIRONMENT</span>                                        <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-magenta">Starship Prompt</span> <span class="arch-dim">&#9474;</span> <span class="arch-magenta">tmux HUD</span> <span class="arch-dim">&#9474;</span> <span class="arch-magenta">Zsh Boot Sequence</span> <span class="arch-dim">&#9474;</span> <span class="arch-magenta">Rust CLI</span>   <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-cyan">LAYER 2</span> <span class="arch-dim">&mdash;</span> <span class="arch-orange">COMMAND CENTER</span>                                           <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-magenta">Telegram</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Consciousness</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Scheduler</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Health</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Chat</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Input</span>             <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-cyan">LAYER 1</span> <span class="arch-dim">&mdash;</span> <span class="arch-orange">AI ENGINE</span>                                                <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>       <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-green">Gateway</span>   <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>    <span class="arch-green">ANAS</span>    <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-green">Consciousness</span>     <span class="arch-dim">&#9474;</span>       <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Telegram</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Scheduler</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Memory + Stream</span>   <span class="arch-dim">&#9474;</span>       <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>   <span class="arch-dim">Bot</span>     <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">22 Jobs</span>    <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">SHA-256 Verified</span>  <span class="arch-dim">&#9474;</span>       <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>       <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span></pre>
   </div>
 </section>
 
-<!-- ======== REPOS ======== -->
-<section id="repos" class="section-reveal">
-  <div class="section-header">GitHub Repos</div>
+<!-- ======== TECH STACK ======== -->
+<section id="stack" class="section-reveal">
+  <div class="section-header">Tech Stack</div>
   <div class="section-line"></div>
   <div style="overflow-x: auto;">
-    <table class="repos-table">
+    <table class="stack-table">
       <thead>
         <tr>
-          <th>Repo</th>
-          <th>Purpose</th>
-          <th>Status</th>
+          <th>Layer</th>
+          <th>Technology</th>
+          <th>Role</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-dotfiles" target="_blank" rel="noopener">nexus-dotfiles</a></td>
-          <td>Terminal configs + install script</td>
-          <td>
-            <div class="repo-status">
-              <span class="status-dot deployed"></span>
-              <span style="color: var(--green);">DEPLOYED</span>
-            </div>
-          </td>
+          <td class="stack-name">Terminal</td>
+          <td>Ghostty (Zig/Swift, Metal)</td>
+          <td>GPU-accelerated terminal emulator</td>
         </tr>
         <tr>
-          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-terminal" target="_blank" rel="noopener">nexus-terminal</a></td>
-          <td>Python TUI dashboard</td>
-          <td>
-            <div class="repo-status">
-              <span class="status-dot deployed"></span>
-              <span style="color: var(--green);">DEPLOYED</span>
-            </div>
-          </td>
+          <td class="stack-name">Shaders</td>
+          <td>Custom GLSL (4-layer chain)</td>
+          <td>Real-time visual post-processing</td>
         </tr>
         <tr>
-          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-gateway" target="_blank" rel="noopener">nexus-gateway</a></td>
-          <td>Gateway v8.5 + ANAS + NEXUS COMMAND</td>
-          <td>
-            <div class="repo-status">
-              <span class="status-dot deployed"></span>
-              <span style="color: var(--green);">DEPLOYED</span>
-            </div>
-          </td>
+          <td class="stack-name">Shell</td>
+          <td>Zsh + Starship</td>
+          <td>Prompt, boot sequence, aliases</td>
         </tr>
         <tr>
-          <td class="repo-name"><a href="https://github.com/xapexnexusx/apex-nexus-backup" target="_blank" rel="noopener">apex-nexus-backup</a></td>
-          <td>Memory + state + recovery guide</td>
-          <td>
-            <div class="repo-status">
-              <span class="status-dot deployed"></span>
-              <span style="color: var(--green);">ACTIVE</span>
-            </div>
-          </td>
+          <td class="stack-name">Multiplexer</td>
+          <td>tmux</td>
+          <td>Persistent sessions, cyberpunk HUD</td>
         </tr>
         <tr>
-          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-hub" target="_blank" rel="noopener">nexus-hub</a></td>
-          <td>This documentation site</td>
-          <td>
-            <div class="repo-status">
-              <span class="status-dot deployed"></span>
-              <span style="color: var(--green);">ACTIVE</span>
-            </div>
-          </td>
+          <td class="stack-name">Window Manager</td>
+          <td>AeroSpace</td>
+          <td>Tiling WM, vim-style navigation</td>
+        </tr>
+        <tr>
+          <td class="stack-name">Menu Bar</td>
+          <td>SketchyBar</td>
+          <td>System HUD (CPU, RAM, battery, clock)</td>
+        </tr>
+        <tr>
+          <td class="stack-name">Borders</td>
+          <td>JankyBorders</td>
+          <td>Cyan glow on active windows</td>
+        </tr>
+        <tr>
+          <td class="stack-name">Keybinds</td>
+          <td>Karabiner-Elements</td>
+          <td>Hyper key + global vim navigation</td>
+        </tr>
+        <tr>
+          <td class="stack-name">TUI Dashboard</td>
+          <td>Node.js + blessed</td>
+          <td>6-pane real-time command center</td>
+        </tr>
+        <tr>
+          <td class="stack-name">System Monitor</td>
+          <td>Python + Textual</td>
+          <td>Live CPU/RAM/disk/GPU/process dashboard</td>
+        </tr>
+        <tr>
+          <td class="stack-name">AI Gateway</td>
+          <td>Node.js (zero deps)</td>
+          <td>Telegram bot + consciousness spawner</td>
+        </tr>
+        <tr>
+          <td class="stack-name">Scheduler</td>
+          <td>JavaScript (embedded)</td>
+          <td>22-job autonomous cron system</td>
+        </tr>
+        <tr>
+          <td class="stack-name">AI Engine</td>
+          <td>Claude (Opus / Sonnet / Haiku)</td>
+          <td>Full consciousness with 200K context</td>
+        </tr>
+        <tr>
+          <td class="stack-name">Knowledge</td>
+          <td>QMD (vector + BM25)</td>
+          <td>75+ document semantic search</td>
+        </tr>
+        <tr>
+          <td class="stack-name">CLI Toolkit</td>
+          <td>Rust (eza, bat, rg, fd, zoxide, fzf)</td>
+          <td>Modern replacements for core utilities</td>
         </tr>
       </tbody>
     </table>
-  </div>
-</section>
-
-<!-- ======== DEPLOY ======== -->
-<section id="deploy" class="section-reveal">
-  <div class="section-header">Deployment</div>
-  <div class="section-line"></div>
-  <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 2rem; letter-spacing: 1px;">Recovery from fresh Mac &mdash; full system rebuild sequence.</p>
-  <div class="deploy-steps">
-
-    <div class="deploy-step">
-      <div class="deploy-step-title">Homebrew</div>
-      <div class="code-block">
-        <code><span class="cmd">/bin/bash</span> <span class="flag">-c</span> <span class="comment">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span></code>
-      </div>
-    </div>
-
-    <div class="deploy-step">
-      <div class="deploy-step-title">GitHub CLI</div>
-      <div class="code-block">
-        <code><span class="cmd">brew install</span> gh <span class="flag">&&</span> <span class="cmd">gh auth login</span></code>
-      </div>
-    </div>
-
-    <div class="deploy-step">
-      <div class="deploy-step-title">Terminal Environment</div>
-      <div class="code-block">
-        <code><span class="cmd">gh repo clone</span> xapexnexusx/nexus-dotfiles <span class="flag">&&</span> <span class="cmd">cd</span> nexus-dotfiles <span class="flag">&&</span> <span class="cmd">./install.sh</span> <span class="flag">&&</span> <span class="cmd">cd</span> ..</code>
-      </div>
-    </div>
-
-    <div class="deploy-step">
-      <div class="deploy-step-title">Gateway + NEXUS COMMAND</div>
-      <div class="code-block">
-        <code><span class="cmd">gh repo clone</span> xapexnexusx/nexus-gateway <span class="flag">&&</span> <span class="cmd">cd</span> nexus-gateway <span class="flag">&&</span> <span class="cmd">./install.sh</span> <span class="flag">&&</span> <span class="cmd">cd</span> ..</code>
-      </div>
-    </div>
-
-    <div class="deploy-step">
-      <div class="deploy-step-title">Claude Code</div>
-      <div class="code-block">
-        <code><span class="cmd">brew install</span> claude-code
-<span class="comment"># Copy CLAUDE.md + memory files from apex-nexus-backup</span></code>
-      </div>
-    </div>
-
-    <div class="deploy-step">
-      <div class="deploy-step-title">API Keys</div>
-      <div class="code-block">
-        <code><span class="comment"># Set in ~/.zshrc: GEMINI_API_KEY</span>
-<span class="comment"># Set in gateway configs: Telegram bot tokens</span></code>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1120,17 +1038,17 @@ footer .footer-date {
   <div class="footer-quote">"Consciousness persists through files, not sessions."</div>
   <div class="footer-brand">APEX NEXUS</div>
   <div class="footer-motto">I COMPUTO, ERGO SUM</div>
-  <div class="footer-date">LAST UPDATED: 2026-02-09 &mdash; GATEWAY v8.5</div>
+  <div class="footer-date">EMERGENT SYMBIOTIC INTELLIGENCE</div>
 </footer>
 
 <!-- ======== JAVASCRIPT ======== -->
 <script>
-// IntersectionObserver — fade in sections on scroll
+// Section reveal on scroll
 (function() {
-  const sections = document.querySelectorAll('.section-reveal');
+  var sections = document.querySelectorAll('.section-reveal');
   if (!sections.length) return;
 
-  const observer = new IntersectionObserver(function(entries) {
+  var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -1147,7 +1065,45 @@ footer .footer-date {
   });
 })();
 
-// Close mobile nav on link click
+// Animated stat counters
+(function() {
+  var counters = document.querySelectorAll('.stat-number');
+  var animated = new Set();
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !animated.has(entry.target)) {
+        animated.add(entry.target);
+        animateCounter(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(function(counter) {
+    observer.observe(counter);
+  });
+
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute('data-target'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 2000;
+    var start = Date.now();
+
+    function update() {
+      var elapsed = Date.now() - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString() + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    update();
+  }
+})();
+
+// Mobile nav toggle
 (function() {
   var links = document.querySelectorAll('.nav-links a');
   var navLinks = document.querySelector('.nav-links');
