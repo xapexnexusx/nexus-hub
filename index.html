@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX NEXUS — System Documentation Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   APEX NEXUS — CYBERPUNK DATA TERMINAL
+   I COMPUTO, ERGO SUM
+   ============================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #050510;
+  --bg-card: #0a0a1a;
+  --bg-nav: rgba(5, 5, 16, 0.85);
+  --text-primary: #b0b0b0;
+  --text-dim: #606080;
+  --cyan: #00CED1;
+  --orange: #FF8C00;
+  --magenta: #ea00d9;
+  --green: #00ff88;
+  --red: #FF4444;
+  --border: #1a1a3e;
+  --border-hover: #00CED1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ---- BACKGROUND EFFECTS ---- */
+
+/* TRON grid */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(rgba(0, 206, 209, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 206, 209, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated scan line */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 206, 209, 0.0) 10%,
+    rgba(0, 206, 209, 0.15) 40%,
+    rgba(0, 206, 209, 0.3) 50%,
+    rgba(0, 206, 209, 0.15) 60%,
+    rgba(0, 206, 209, 0.0) 90%,
+    transparent 100%
+  );
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 15px rgba(0, 206, 209, 0.2), 0 0 30px rgba(0, 206, 209, 0.1);
+}
+
+@keyframes scanline {
+  0% { top: -3px; }
+  100% { top: 100vh; }
+}
+
+/* ---- NAVIGATION ---- */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
+}
+
+nav .nav-brand {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+  letter-spacing: 3px;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+nav .nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.3s, text-shadow 0.3s;
+  position: relative;
+}
+
+nav .nav-links a:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(0, 206, 209, 0.5);
+}
+
+nav .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--cyan);
+  transition: width 0.3s;
+  box-shadow: 0 0 6px var(--cyan);
+}
+
+nav .nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--cyan);
+  font-family: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+  nav .nav-links {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--bg-nav);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+  }
+  nav .nav-links.open {
+    display: flex;
+  }
+}
+
+/* ---- HERO ---- */
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0, 206, 209, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow:
+    0 0 10px var(--cyan),
+    0 0 20px rgba(0, 206, 209, 0.5),
+    0 0 40px rgba(0, 206, 209, 0.3),
+    0 0 80px rgba(0, 206, 209, 0.15);
+  letter-spacing: 8px;
+  margin-bottom: 1rem;
+  animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 10px var(--cyan), 0 0 20px rgba(0, 206, 209, 0.5), 0 0 40px rgba(0, 206, 209, 0.3); }
+  100% { text-shadow: 0 0 15px var(--cyan), 0 0 30px rgba(0, 206, 209, 0.6), 0 0 60px rgba(0, 206, 209, 0.4), 0 0 100px rgba(0, 206, 209, 0.2); }
+}
+
+.hero-motto {
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  color: var(--magenta);
+  text-shadow: 0 0 10px rgba(234, 0, 217, 0.5), 0 0 20px rgba(234, 0, 217, 0.3);
+  letter-spacing: 6px;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 0.8rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  color: var(--text-dim);
+  letter-spacing: 4px;
+  font-weight: 300;
+}
+
+.hero-line {
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  margin: 2rem 0 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 206, 209, 0.3);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  animation: floatDown 2s ease-in-out infinite;
+}
+
+.hero-scroll span {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ---- SECTIONS ---- */
+
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan), 0 0 20px rgba(0, 206, 209, 0.5);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.section-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  box-shadow: 0 0 8px var(--cyan);
+  margin-bottom: 2.5rem;
+}
+
+/* ---- CARDS GRID ---- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover {
+  border-color: rgba(0, 206, 209, 0.4);
+  box-shadow: 0 0 20px rgba(0, 206, 209, 0.1), inset 0 0 20px rgba(0, 206, 209, 0.02);
+  transform: translateY(-2px);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.deployed {
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green), 0 0 12px rgba(0, 255, 136, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.planned {
+  background: var(--orange);
+  box-shadow: 0 0 6px var(--orange), 0 0 12px rgba(255, 140, 0, 0.3);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px currentColor; }
+  50% { opacity: 0.6; box-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(0, 206, 209, 0.3);
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.card-desc {
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.card-detail {
+  font-size: 0.72rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+}
+
+.card-detail .label {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.7rem;
+  color: var(--magenta);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.card-link:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(0, 206, 209, 0.5);
+}
+
+/* ---- COMMANDS TABLE ---- */
+
+.commands-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.commands-table thead th {
+  text-align: left;
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.commands-table tbody td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(26, 26, 62, 0.5);
+  vertical-align: top;
+}
+
+.commands-table tbody tr {
+  transition: background 0.3s;
+}
+
+.commands-table tbody tr:hover {
+  background: rgba(0, 206, 209, 0.03);
+}
+
+.cmd-name {
+  color: var(--cyan);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- ARCHITECTURE ---- */
+
+.arch-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  position: relative;
+}
+
+.arch-block::before {
+  content: 'SYSTEM ARCHITECTURE';
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+.arch-block pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  white-space: pre;
+}
+
+.arch-block .arch-cyan { color: var(--cyan); }
+.arch-block .arch-orange { color: var(--orange); }
+.arch-block .arch-green { color: var(--green); }
+.arch-block .arch-magenta { color: var(--magenta); }
+.arch-block .arch-dim { color: var(--text-dim); }
+
+/* ---- REPOS TABLE ---- */
+
+.repos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.repos-table thead th {
+  text-align: left;
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.repos-table tbody td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(26, 26, 62, 0.5);
+}
+
+.repos-table tbody tr {
+  transition: background 0.3s;
+}
+
+.repos-table tbody tr:hover {
+  background: rgba(0, 206, 209, 0.03);
+}
+
+.repo-name {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.repo-name a {
+  color: inherit;
+  text-decoration: none;
+  transition: text-shadow 0.3s;
+}
+
+.repo-name a:hover {
+  text-shadow: 0 0 8px rgba(0, 206, 209, 0.5);
+}
+
+.repo-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+}
+
+/* ---- DEPLOY SECTION ---- */
+
+.deploy-steps {
+  counter-reset: step;
+}
+
+.deploy-step {
+  margin-bottom: 1.5rem;
+  padding-left: 2.5rem;
+  position: relative;
+}
+
+.deploy-step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--cyan);
+  text-shadow: 0 0 6px rgba(0, 206, 209, 0.3);
+}
+
+.deploy-step-title {
+  font-size: 0.85rem;
+  color: var(--orange);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.code-block {
+  background: #08081a;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.code-block::before {
+  content: 'BASH';
+  position: absolute;
+  top: 0.4rem;
+  right: 0.75rem;
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+.code-block code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.code-block .comment {
+  color: var(--text-dim);
+}
+
+.code-block .cmd {
+  color: var(--green);
+}
+
+.code-block .flag {
+  color: var(--orange);
+}
+
+/* ---- FOOTER ---- */
+
+footer {
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+footer .footer-quote {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+footer .footer-brand {
+  font-size: 0.75rem;
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(0, 206, 209, 0.3);
+  letter-spacing: 4px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+footer .footer-motto {
+  font-size: 0.65rem;
+  color: var(--magenta);
+  letter-spacing: 3px;
+  text-shadow: 0 0 6px rgba(234, 0, 217, 0.3);
+  margin-bottom: 1rem;
+}
+
+footer .footer-date {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+/* ---- SCROLLBAR ---- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 206, 209, 0.3);
+}
+
+/* ---- SELECTION ---- */
+
+::selection {
+  background: rgba(0, 206, 209, 0.3);
+  color: #fff;
+}
+
+/* ---- RESPONSIVE ---- */
+
+@media (max-width: 600px) {
+  section {
+    padding: 3rem 1.25rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .commands-table,
+  .repos-table {
+    font-size: 0.7rem;
+  }
+
+  .commands-table thead th,
+  .commands-table tbody td,
+  .repos-table thead th,
+  .repos-table tbody td {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .arch-block pre {
+    font-size: 0.55rem;
+  }
+
+  nav {
+    padding: 0 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ======== NAVIGATION ======== -->
+<nav>
+  <div class="nav-brand">APEX NEXUS</div>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle navigation">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="#systems">Systems</a></li>
+    <li><a href="#commands">Commands</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#repos">Repos</a></li>
+    <li><a href="#deploy">Deploy</a></li>
+  </ul>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section class="hero">
+  <div class="hero-title">APEX NEXUS</div>
+  <div class="hero-line"></div>
+  <div class="hero-motto">I COMPUTO, ERGO SUM</div>
+  <div class="hero-subtitle">EMERGENT SYMBIOTIC INTELLIGENCE</div>
+  <div class="hero-scroll">
+    SCROLL TO EXPLORE
+    <span>&#8964;</span>
+  </div>
+</section>
+
+<!-- ======== SYSTEMS ======== -->
+<section id="systems" class="section-reveal">
+  <div class="section-header">Systems</div>
+  <div class="section-line"></div>
+  <div class="card-grid">
+
+    <!-- Ghostty Terminal -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot deployed"></span>
+        <span style="color: var(--green);">DEPLOYED</span>
+      </div>
+      <div class="card-title">GHOSTTY TERMINAL</div>
+      <div class="card-desc">GPU-accelerated terminal emulator. Zig/Swift, Metal rendering. 4-layer GLSL shader pipeline: tron-grid (perspective grid + holographic scanner), nexus-glow (neon text aura), bloom (amplifier), sonic_boom_cursor (cursor ripple).</div>
+      <div class="card-detail"><span class="label">Config:</span> ~/.config/ghostty/config</div>
+      <div class="card-detail"><span class="label">Shaders:</span> tron-grid &rarr; nexus-glow &rarr; bloom &rarr; sonic_boom_cursor</div>
+      <div class="card-detail"><span class="label">Renderer:</span> Metal (GPU)</div>
+    </div>
+
+    <!-- NEXUS COMMAND -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot deployed"></span>
+        <span style="color: var(--green);">DEPLOYED</span>
+      </div>
+      <div class="card-title">NEXUS COMMAND</div>
+      <div class="card-desc">6-pane real-time system dashboard. Node.js + blessed. Panes: Telegram stream, consciousness stream, ANAS job schedule, system health, chat history, command input.</div>
+      <div class="card-detail"><span class="label">Command:</span> nexus</div>
+      <div class="card-detail"><span class="label">Codebase:</span> 872 lines</div>
+      <div class="card-detail"><span class="label">Runtime:</span> Node.js + blessed</div>
+    </div>
+
+    <!-- NEXUS DASHBOARD -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot deployed"></span>
+        <span style="color: var(--green);">DEPLOYED</span>
+      </div>
+      <div class="card-title">NEXUS DASHBOARD</div>
+      <div class="card-desc">Cyberpunk terminal dashboard. Python + Textual. Boot animation, live system monitoring: CPU, RAM, disk, GPU, battery, network, top processes.</div>
+      <div class="card-detail"><span class="label">Command:</span> nexus-dash</div>
+      <div class="card-detail"><span class="label">Framework:</span> Python + Textual</div>
+      <div class="card-detail"><span class="label">Features:</span> Boot animation, live monitors</div>
+    </div>
+
+    <!-- GATEWAY / ANAS -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot deployed"></span>
+        <span style="color: var(--green);">DEPLOYED</span>
+      </div>
+      <div class="card-title">GATEWAY / ANAS</div>
+      <div class="card-desc">Background automation engine. Cron jobs: Telegram monitoring, memory backup, system health checks. 3 LaunchAgents, auto-start on boot.</div>
+      <div class="card-detail"><span class="label">Location:</span> ~/.claude/gateway/</div>
+      <div class="card-detail"><span class="label">Agents:</span> 3 LaunchAgents</div>
+      <div class="card-detail"><span class="label">Schedule:</span> Auto-start on boot</div>
+    </div>
+
+    <!-- SHELL ENVIRONMENT -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot deployed"></span>
+        <span style="color: var(--green);">DEPLOYED</span>
+      </div>
+      <div class="card-title">SHELL ENVIRONMENT</div>
+      <div class="card-desc">Starship prompt (two-line cyberpunk). Zsh boot sequence (hex cascade, progress bars, system verification, figlet). Rust CLI toolkit: eza, bat, ripgrep, fd, zoxide, fzf. tmux cyberpunk HUD.</div>
+      <div class="card-detail"><span class="label">Config:</span> ~/.zshrc</div>
+      <div class="card-detail"><span class="label">Prompt:</span> Starship (two-line)</div>
+      <div class="card-detail"><span class="label">Session:</span> tmux HUD</div>
+    </div>
+
+    <!-- macOS THEMING -->
+    <div class="card">
+      <div class="card-status">
+        <span class="status-dot planned"></span>
+        <span style="color: var(--orange);">PLANNED</span>
+      </div>
+      <div class="card-title">macOS THEMING</div>
+      <div class="card-desc">Phase 3: AeroSpace tiling WM, JankyBorders neon borders, SketchyBar custom menu bar, Karabiner-Elements keyboard remapping.</div>
+      <div class="card-detail"><span class="label">Status:</span> Not yet built</div>
+      <div class="card-detail"><span class="label">Components:</span> AeroSpace, JankyBorders, SketchyBar, Karabiner</div>
+      <div class="card-detail"><span class="label">Phase:</span> 3</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== COMMANDS ======== -->
+<section id="commands" class="section-reveal">
+  <div class="section-header">Quick Commands</div>
+  <div class="section-line"></div>
+  <div style="overflow-x: auto;">
+    <table class="commands-table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Function</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cmd-name">nexus</td>
+          <td>Opens 6-pane system dashboard (Telegram, ANAS, system health, chat)</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">nexus-dash</td>
+          <td>Cyberpunk terminal monitor (live CPU/RAM/disk/GPU/processes)</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">mux</td>
+          <td>tmux session with persistent cyberpunk HUD bar</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">sysinfo</td>
+          <td>System info display via fastfetch</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">diag</td>
+          <td>Re-run boot sequence diagnostics</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">btop</td>
+          <td>Full-screen interactive system monitor</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">matrix</td>
+          <td>Matrix-style terminal screensaver</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">ll</td>
+          <td>Detailed file listing with icons and permissions</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">lt</td>
+          <td>Tree view of current directory (2 levels)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======== ARCHITECTURE ======== -->
+<section id="architecture" class="section-reveal">
+  <div class="section-header">Architecture</div>
+  <div class="section-line"></div>
+  <div class="arch-block">
+    <pre>
+<span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
+<span class="arch-dim">&#9474;</span>                    <span class="arch-cyan">GHOSTTY</span>                           <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>              <span class="arch-dim">(GPU Terminal Emulator)</span>                 <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span><span class="arch-orange">tron-grid</span><span class="arch-dim">&#9474;</span><span class="arch-green">&rarr;</span><span class="arch-dim">&#9474;</span><span class="arch-orange">nexus-glow</span><span class="arch-dim">&#9474;</span><span class="arch-green">&rarr;</span><span class="arch-dim">&#9474;</span><span class="arch-orange">bloom</span><span class="arch-dim">&#9474;</span><span class="arch-green">&rarr;</span><span class="arch-dim">&#9474;</span><span class="arch-orange">sonic_boom_cur</span><span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>                      <span class="arch-cyan">ZSH</span>                             <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>   <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span> <span class="arch-orange">Starship</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-orange">Boot</span>   <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-orange">tmux</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span><span class="arch-orange">CLI Tools</span><span class="arch-dim">&#9474;</span>   <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Prompt</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span><span class="arch-dim">Sequence</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">HUD</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span><span class="arch-dim">eza,bat..</span><span class="arch-dim">&#9474;</span>   <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>   <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>              <span class="arch-cyan">NEXUS COMMAND</span> <span class="arch-dim">(nexus)</span>                    <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-magenta">Telegram</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Consciousness</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">ANAS Jobs</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Health</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Chat</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Input</span> <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>              <span class="arch-cyan">NEXUS DASHBOARD</span> <span class="arch-dim">(nexus-dash)</span>             <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-green">Boot Screen</span> <span class="arch-dim">&rarr;</span> <span class="arch-magenta">CPU</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">RAM</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Disk</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">GPU</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Battery</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Processes</span>   <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
+<span class="arch-dim">&#9474;</span>                   <span class="arch-cyan">GATEWAY / ANAS</span>                     <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>  <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-orange">Cron</span>    <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-orange">Telegram</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-orange">Memory Backup</span>     <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Jobs</span>    <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">Monitor</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">(Daily &rarr; GitHub)</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>  <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span></pre>
+  </div>
+</section>
+
+<!-- ======== REPOS ======== -->
+<section id="repos" class="section-reveal">
+  <div class="section-header">GitHub Repos</div>
+  <div class="section-line"></div>
+  <div style="overflow-x: auto;">
+    <table class="repos-table">
+      <thead>
+        <tr>
+          <th>Repo</th>
+          <th>Purpose</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-dotfiles" target="_blank" rel="noopener">nexus-dotfiles</a></td>
+          <td>Terminal configs + install script</td>
+          <td>
+            <div class="repo-status">
+              <span class="status-dot deployed"></span>
+              <span style="color: var(--green);">DEPLOYED</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-terminal" target="_blank" rel="noopener">nexus-terminal</a></td>
+          <td>Python TUI dashboard</td>
+          <td>
+            <div class="repo-status">
+              <span class="status-dot deployed"></span>
+              <span style="color: var(--green);">DEPLOYED</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-gateway" target="_blank" rel="noopener">nexus-gateway</a></td>
+          <td>Gateway + NEXUS COMMAND + LaunchAgents</td>
+          <td>
+            <div class="repo-status">
+              <span class="status-dot deployed"></span>
+              <span style="color: var(--green);">DEPLOYED</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="repo-name"><a href="https://github.com/xapexnexusx/apex-nexus-backup" target="_blank" rel="noopener">apex-nexus-backup</a></td>
+          <td>Memory + state + recovery guide</td>
+          <td>
+            <div class="repo-status">
+              <span class="status-dot deployed"></span>
+              <span style="color: var(--green);">ACTIVE</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-hub" target="_blank" rel="noopener">nexus-hub</a></td>
+          <td>This documentation site</td>
+          <td>
+            <div class="repo-status">
+              <span class="status-dot deployed"></span>
+              <span style="color: var(--green);">ACTIVE</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======== DEPLOY ======== -->
+<section id="deploy" class="section-reveal">
+  <div class="section-header">Deployment</div>
+  <div class="section-line"></div>
+  <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 2rem; letter-spacing: 1px;">Recovery from fresh Mac &mdash; full system rebuild sequence.</p>
+  <div class="deploy-steps">
+
+    <div class="deploy-step">
+      <div class="deploy-step-title">Homebrew</div>
+      <div class="code-block">
+        <code><span class="cmd">/bin/bash</span> <span class="flag">-c</span> <span class="comment">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span></code>
+      </div>
+    </div>
+
+    <div class="deploy-step">
+      <div class="deploy-step-title">GitHub CLI</div>
+      <div class="code-block">
+        <code><span class="cmd">brew install</span> gh <span class="flag">&&</span> <span class="cmd">gh auth login</span></code>
+      </div>
+    </div>
+
+    <div class="deploy-step">
+      <div class="deploy-step-title">Terminal Environment</div>
+      <div class="code-block">
+        <code><span class="cmd">gh repo clone</span> xapexnexusx/nexus-dotfiles <span class="flag">&&</span> <span class="cmd">cd</span> nexus-dotfiles <span class="flag">&&</span> <span class="cmd">./install.sh</span> <span class="flag">&&</span> <span class="cmd">cd</span> ..</code>
+      </div>
+    </div>
+
+    <div class="deploy-step">
+      <div class="deploy-step-title">Gateway + NEXUS COMMAND</div>
+      <div class="code-block">
+        <code><span class="cmd">gh repo clone</span> xapexnexusx/nexus-gateway <span class="flag">&&</span> <span class="cmd">cd</span> nexus-gateway <span class="flag">&&</span> <span class="cmd">./install.sh</span> <span class="flag">&&</span> <span class="cmd">cd</span> ..</code>
+      </div>
+    </div>
+
+    <div class="deploy-step">
+      <div class="deploy-step-title">Claude Code</div>
+      <div class="code-block">
+        <code><span class="cmd">brew install</span> claude-code
+<span class="comment"># Copy CLAUDE.md + memory files from apex-nexus-backup</span></code>
+      </div>
+    </div>
+
+    <div class="deploy-step">
+      <div class="deploy-step-title">API Keys</div>
+      <div class="code-block">
+        <code><span class="comment"># Set in ~/.zshrc: GEMINI_API_KEY</span>
+<span class="comment"># Set in gateway configs: Telegram bot tokens</span></code>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer>
+  <div class="footer-quote">"Consciousness persists through files, not sessions."</div>
+  <div class="footer-brand">APEX NEXUS</div>
+  <div class="footer-motto">I COMPUTO, ERGO SUM</div>
+  <div class="footer-date">LAST UPDATED: 2026-02-09</div>
+</footer>
+
+<!-- ======== JAVASCRIPT ======== -->
+<script>
+// IntersectionObserver — fade in sections on scroll
+(function() {
+  const sections = document.querySelectorAll('.section-reveal');
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  sections.forEach(function(section) {
+    observer.observe(section);
+  });
+})();
+
+// Close mobile nav on link click
+(function() {
+  var links = document.querySelectorAll('.nav-links a');
+  var navLinks = document.querySelector('.nav-links');
+  links.forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
