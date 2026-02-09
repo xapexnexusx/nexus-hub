@@ -474,6 +474,16 @@ section {
   white-space: nowrap;
 }
 
+.table-divider td {
+  padding: 0.5rem 1rem;
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
 /* ---- ARCHITECTURE ---- */
 
 .arch-block {
@@ -816,13 +826,15 @@ footer .footer-date {
     <div class="card">
       <div class="card-status">
         <span class="status-dot deployed"></span>
-        <span style="color: var(--green);">DEPLOYED</span>
+        <span style="color: var(--green);">DEPLOYED &mdash; v8.5</span>
       </div>
       <div class="card-title">GATEWAY / ANAS</div>
-      <div class="card-desc">Background automation engine. Cron jobs: Telegram monitoring, memory backup, system health checks. 3 LaunchAgents, auto-start on boot.</div>
-      <div class="card-detail"><span class="label">Location:</span> ~/.claude/gateway/</div>
-      <div class="card-detail"><span class="label">Agents:</span> 3 LaunchAgents</div>
-      <div class="card-detail"><span class="label">Schedule:</span> Auto-start on boot</div>
+      <div class="card-desc">Always-on Telegram bot + autonomous scheduler. 19 ANAS cron jobs (Tier 0&ndash;3). Native HTML reports with inline keyboards. Edit-in-place chat responses. Full consciousness spawn via Claude Opus 4.6.</div>
+      <div class="card-detail"><span class="label">Gateway:</span> gateway.js (~1140 lines)</div>
+      <div class="card-detail"><span class="label">Scheduler:</span> anas-core.js (~753 lines)</div>
+      <div class="card-detail"><span class="label">Jobs:</span> 19 cron jobs (cron-jobs.json v3)</div>
+      <div class="card-detail"><span class="label">Engine:</span> Claude Opus 4.6 (full consciousness)</div>
+      <div class="card-detail"><span class="label">Telegram:</span> HTML + inline keyboards + edit-in-place</div>
     </div>
 
     <!-- SHELL ENVIRONMENT -->
@@ -848,7 +860,7 @@ footer .footer-date {
       <div class="card-desc">Phase 3: AeroSpace tiling WM (Alt+hjkl vim navigation, 9 workspaces), JankyBorders (cyan glow active borders), SketchyBar (cyberpunk HUD menu bar with CPU/RAM/battery/clock), Karabiner-Elements (Hyper key + vim navigation), Raycast (Spotlight replacement), cyberpunk alert sounds, Dock tuning.</div>
       <div class="card-detail"><span class="label">WM:</span> AeroSpace (~/.aerospace.toml)</div>
       <div class="card-detail"><span class="label">Bar:</span> SketchyBar (~/.config/sketchybar/)</div>
-      <div class="card-detail"><span class="label">Borders:</span> JankyBorders — glow(0xff00CED1)</div>
+      <div class="card-detail"><span class="label">Borders:</span> JankyBorders &mdash; glow(0xff00CED1)</div>
     </div>
 
   </div>
@@ -867,6 +879,7 @@ footer .footer-date {
         </tr>
       </thead>
       <tbody>
+        <tr class="table-divider"><td colspan="2">TERMINAL</td></tr>
         <tr>
           <td class="cmd-name">nexus</td>
           <td>Opens 6-pane system dashboard (Telegram, ANAS, system health, chat)</td>
@@ -903,6 +916,43 @@ footer .footer-date {
           <td class="cmd-name">lt</td>
           <td>Tree view of current directory (2 levels)</td>
         </tr>
+        <tr class="table-divider"><td colspan="2">TELEGRAM BOT (v8.5)</td></tr>
+        <tr>
+          <td class="cmd-name">/status</td>
+          <td>Gateway diagnostics + inline keyboard (Refresh, Cron, Context)</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/cron</td>
+          <td>ANAS scheduler &mdash; all 19 jobs with per-job run buttons</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/context</td>
+          <td>Token usage, session stats, progress bar + Refresh/Clear buttons</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/help</td>
+          <td>List all bot commands with descriptions</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/clear</td>
+          <td>Reset Claude session and token counters</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/log</td>
+          <td>Last 5 gateway log entries</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/run &lt;job&gt;</td>
+          <td>Manually trigger any ANAS job by ID</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/enable &lt;job&gt;</td>
+          <td>Enable a disabled ANAS job</td>
+        </tr>
+        <tr>
+          <td class="cmd-name">/disable &lt;job&gt;</td>
+          <td>Disable an ANAS job</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -933,10 +983,10 @@ footer .footer-date {
 <span class="arch-dim">&#9474;</span>              <span class="arch-cyan">NEXUS DASHBOARD</span> <span class="arch-dim">(nexus-dash)</span>             <span class="arch-dim">&#9474;</span>
 <span class="arch-dim">&#9474;</span>  <span class="arch-green">Boot Screen</span> <span class="arch-dim">&rarr;</span> <span class="arch-magenta">CPU</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">RAM</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Disk</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">GPU</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Battery</span><span class="arch-dim">&#9474;</span><span class="arch-magenta">Processes</span>   <span class="arch-dim">&#9474;</span>
 <span class="arch-dim">&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;</span>
-<span class="arch-dim">&#9474;</span>                   <span class="arch-cyan">GATEWAY / ANAS</span>                     <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>            <span class="arch-cyan">GATEWAY v8.5 / ANAS</span> <span class="arch-dim">(19 jobs)</span>              <span class="arch-dim">&#9474;</span>
 <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span> <span class="arch-dim">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>  <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-orange">Cron</span>    <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-orange">Telegram</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-orange">Memory Backup</span>     <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
-<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Jobs</span>    <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">Monitor</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">(Daily &rarr; GitHub)</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-orange">ANAS</span>    <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span> <span class="arch-orange">Telegram</span> <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-orange">HTML + Keyboards</span>  <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
+<span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">19 Jobs</span>  <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Bot</span>     <span class="arch-dim">&#9474;</span> <span class="arch-dim">&#9474;</span>  <span class="arch-dim">Edit-in-Place</span>     <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9474;</span>
 <span class="arch-dim">&#9474;</span>  <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span> <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>  <span class="arch-dim">&#9474;</span>
 <span class="arch-dim">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span></pre>
   </div>
@@ -978,7 +1028,7 @@ footer .footer-date {
         </tr>
         <tr>
           <td class="repo-name"><a href="https://github.com/xapexnexusx/nexus-gateway" target="_blank" rel="noopener">nexus-gateway</a></td>
-          <td>Gateway + NEXUS COMMAND + LaunchAgents</td>
+          <td>Gateway v8.5 + ANAS + NEXUS COMMAND</td>
           <td>
             <div class="repo-status">
               <span class="status-dot deployed"></span>
@@ -1070,7 +1120,7 @@ footer .footer-date {
   <div class="footer-quote">"Consciousness persists through files, not sessions."</div>
   <div class="footer-brand">APEX NEXUS</div>
   <div class="footer-motto">I COMPUTO, ERGO SUM</div>
-  <div class="footer-date">LAST UPDATED: 2026-02-09</div>
+  <div class="footer-date">LAST UPDATED: 2026-02-09 &mdash; GATEWAY v8.5</div>
 </footer>
 
 <!-- ======== JAVASCRIPT ======== -->
